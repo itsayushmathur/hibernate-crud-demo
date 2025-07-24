@@ -94,3 +94,27 @@ private Long id;
 ### ✅ Summary:
 - Use **EntityManager** when you need **custom, low-level control**.
 - Use **JpaRepository** for **standard CRUD operations** and **faster development**.
+
+---
+## ⚙️ `spring.jpa.hibernate.ddl-auto`
+
+The `spring.jpa.hibernate.ddl-auto` property in `application.properties` controls **how the database schema is managed** at runtime.
+
+### 🔧 Common Values:
+
+| Value      | Description                                                                 |
+|------------|-----------------------------------------------------------------------------|
+| `none`     | No action will be performed (default if not set explicitly)                |
+| `create`   | Drops and recreates the database schema **each time** the app starts       |
+| `create-drop` | Same as `create`, but also drops schema **when the app shuts down**     |
+| `update`   | Updates the existing schema without losing data                            |
+| `validate` | Validates that the schema matches the entities, but does not modify it     |
+
+### 📝 Example:
+```properties
+spring.jpa.hibernate.ddl-auto=update
+```
+⚠️ 
+Use create or create-drop **only in development**, as they will delete existing data.
+---
+
