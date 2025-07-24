@@ -27,9 +27,30 @@ public class CruddemoApplication {
 //			readStudent(studentDAO);
 //			queryForStudents(studentDAO);
 //			findStudentByLastName(studentDAO);
-			updateStudent(studentDAO);
-
+//			updateStudent(studentDAO);
+//			deleteStudent(studentDAO);
+			deleteAllStudents(studentDAO);
 		};
+	}
+
+	private void deleteAllStudents(StudentDAO studentDAO) {
+		System.out.println("Enter 1 to delete All. This action cannot be reversed. Press 0 to exit without deleting.");
+		int x = scanner.nextInt();
+
+		if(x == 1){
+			System.out.println("Deleting all ...");
+			System.out.println( studentDAO.deleteAll() +" entries deleted.");
+		}
+		else
+			System.out.println("Aborted.");
+	}
+
+	private void deleteStudent(StudentDAO studentDAO) {
+		System.out.print("Enter id: ");
+		int studentID = scanner.nextInt();
+		studentDAO.delete(studentID);
+		System.out.println("Entry Deleted");
+
 	}
 
 	private void updateStudent(StudentDAO studentDAO) {
@@ -114,14 +135,15 @@ public class CruddemoApplication {
 	private void createMultipleStudents(StudentDAO studentDAO) {
 		// create multiple students
 		System.out.println("Creating multiple student objects...");
-//		Student tempStudent = new Student("Ayush","Mathur","mathurayush121@gmail.com");
+		Student tempStudent = new Student("Ayush","Mathur","mathurayush121@gmail.com");
 		Student tempStudent1 = new Student("Kengan","Ashura","fightclub1@gmail.com");
 		Student tempStudent2 = new Student("Baki","Hanma","killdad@mission.com");
 		Student tempStudent3 = new Student("Naruto","Uzumaki","hokage@leaf.com");
 
+
 		// save the student object
 		System.out.println("Saving the students ...");
-//		studentDAO.save(tempStudent);
+		studentDAO.save(tempStudent);
 		studentDAO.save(tempStudent1);
 		studentDAO.save(tempStudent2);
 		studentDAO.save(tempStudent3);
