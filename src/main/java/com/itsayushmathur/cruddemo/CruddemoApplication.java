@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.util.List;
+import java.util.Scanner;
 
 @SpringBootApplication
 public class CruddemoApplication {
@@ -22,8 +23,25 @@ public class CruddemoApplication {
 //			createStudent(studentDAO);
 //			createMultipleStudents(studentDAO);
 //			readStudent(studentDAO);
-			queryForStudents(studentDAO);
+//			queryForStudents(studentDAO);
+			findStudentByLastName(studentDAO);
+
 		};
+	}
+
+	private void findStudentByLastName(StudentDAO studentDAO) {
+
+		Scanner scanner= new Scanner(System.in);
+		System.out.print("Please enter the last name : ");
+		String queryName = scanner.nextLine();
+
+		//get a list of students
+		List<Student> theStudents = studentDAO.findByLastName(queryName);
+
+		//display the list of students
+		for(Student tempStudent : theStudents){
+			System.out.println(tempStudent);
+		}
 	}
 
 	private void queryForStudents(StudentDAO studentDAO) {
@@ -58,9 +76,9 @@ public class CruddemoApplication {
 		// create multiple students
 		System.out.println("Creating multiple student objects...");
 //		Student tempStudent = new Student("Ayush","Mathur","mathurayush121@gmail.com");
-		Student tempStudent1 = new Student("Ned","Stark","nscommander@gmail.com");
-		Student tempStudent2 = new Student("Elena","Salvatore","crybaby@gmail.com");
-		Student tempStudent3 = new Student("Damon","Salvatore","evilvamp@gmail.com");
+		Student tempStudent1 = new Student("Kengan","Ashura","fightclub1@gmail.com");
+		Student tempStudent2 = new Student("Baki","Hanma","killdad@mission.com");
+		Student tempStudent3 = new Student("Naruto","Uzumaki","hokage@leaf.com");
 
 		// save the student object
 		System.out.println("Saving the students ...");
