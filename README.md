@@ -79,3 +79,18 @@ private Long id;
 | `TABLE`          | Uses a separate table to generate and manage primary key values             |
 
 ---
+## 🆚 EntityManager vs JpaRepository
+
+| Feature              | `EntityManager`                                    | `JpaRepository`                                      |
+|----------------------|----------------------------------------------------|------------------------------------------------------|
+| Type                 | **Low-level API**                                   | **High-level abstraction** built on top of JPA       |
+| Origin               | Part of **JPA Specification**                       | Part of **Spring Data JPA**                          |
+| Method Definitions   | Requires manual creation of queries and methods     | Comes with **predefined CRUD methods**               |
+| Query Writing        | Manual with `JPQL` or `Criteria API`                | Supports method naming conventions and custom queries|
+| Boilerplate Code     | More code required                                  | Minimal code required                                |
+| Use Case             | Fine-grained control over persistence operations    | Rapid development with common database operations    |
+| Example Usage        | `entityManager.persist(entity)`                     | `jpaRepository.save(entity)`                         |
+
+### ✅ Summary:
+- Use **EntityManager** when you need **custom, low-level control**.
+- Use **JpaRepository** for **standard CRUD operations** and **faster development**.
