@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 @SpringBootApplication
@@ -17,6 +18,7 @@ public class CruddemoApplication {
 		SpringApplication.run(CruddemoApplication.class, args);
 	}
 
+	Scanner scanner= new Scanner(System.in);
 	@Bean
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
 		return runner -> {
@@ -24,14 +26,50 @@ public class CruddemoApplication {
 //			createMultipleStudents(studentDAO);
 //			readStudent(studentDAO);
 //			queryForStudents(studentDAO);
-			findStudentByLastName(studentDAO);
+//			findStudentByLastName(studentDAO);
+			updateStudent(studentDAO);
 
 		};
 	}
 
+	private void updateStudent(StudentDAO studentDAO) {
+
+		//retrieve student based on the id:primary key
+		System.out.print("Enter id: ");
+		int studentID = scanner.nextInt();
+		scanner.nextLine();
+		Student myStudent = studentDAO.findByID(studentID);
+
+		//change name to what you want
+		System.out.println("Enter the changes. leave blank if no change!");
+		System.out.println("What is the new first name? ");
+		String newfirstName= scanner.nextLine();
+		System.out.println("What is the new last name? ");
+		String newlastName= scanner.nextLine();
+		System.out.println("What is the new email? ");
+		String newemail= scanner.nextLine();
+
+		if(!Objects.equals(newfirstName, "")) {
+			myStudent.setFirstName(newfirstName);
+		}
+		if(!Objects.equals(newlastName, "")) {
+			myStudent.setLastName(newlastName);
+		}
+		if(!Objects.equals(newemail, "")) {
+			myStudent.setEmail(newemail);
+		}
+
+		//update the student
+		studentDAO.update(myStudent);
+
+		//display the updated student.
+		System.out.println("Update operation complete: "+ myStudent);
+
+	}
+
 	private void findStudentByLastName(StudentDAO studentDAO) {
 
-		Scanner scanner= new Scanner(System.in);
+
 		System.out.print("Please enter the last name : ");
 		String queryName = scanner.nextLine();
 
@@ -42,6 +80,7 @@ public class CruddemoApplication {
 		for(Student tempStudent : theStudents){
 			System.out.println(tempStudent);
 		}
+
 	}
 
 	private void queryForStudents(StudentDAO studentDAO) {
@@ -105,6 +144,8 @@ public class CruddemoApplication {
 		System.out.println("Saved.Generated id : "+ tempStudent.getId());
 
 	}
+
+
 }
 
 
